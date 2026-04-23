@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueBench Digital — Build products that scale.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Manrope:wght@300;400;500;700&family=Fraunces:ital,opsz,wght@1,9,300;1,9,900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-blue:      #1C52FF;
+      --color-green:     #D3FEB6;
+      --color-black:     #0D0D12;
+      --color-cream:     #F5F0E8;
+      --color-blue-mid:  #6B7AFF;
+      --color-navy:      #0A1628;
+      --color-white:     #FFFFFF;
+      --color-gray-200:  #E2DED6;
+      --color-gray-600:  #6B6560;
+      --color-gray-800:  #2E2A26;
+
+      --color-text-on-dark:        #FFFFFF;
+      --color-text-on-dark-muted:  rgba(255,255,255,0.52);
+      --color-text-on-light:       #2E2A26;
+      --color-text-on-light-muted: #6B6560;
+      --color-border-on-dark:      rgba(255,255,255,0.10);
+      --color-border-on-light:     #E2DED6;
+
+      --font-display:   'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-body:      'Manrope', system-ui, sans-serif;
+      --font-editorial: 'Fraunces', Georgia, serif;
+
+      --text-xs:   0.75rem;
+      --text-sm:   0.875rem;
+      --text-base: 1rem;
+      --text-lg:   1.125rem;
+      --text-xl:   1.25rem;
+      --text-2xl:  1.5rem;
+      --text-3xl:  1.875rem;
+      --text-4xl:  2.25rem;
+      --text-5xl:  3rem;
+
+      --leading-none:    1;
+      --leading-tight:   1.1;
+      --leading-snug:    1.3;
+      --leading-relaxed: 1.65;
+
+      --tracking-tight:  -0.03em;
+      --tracking-snug:   -0.02em;
+      --tracking-wide:    0.05em;
+      --tracking-widest:  0.15em;
+
+      --weight-light:     300;
+      --weight-medium:    500;
+      --weight-bold:      700;
+      --weight-extrabold: 800;
+
+      --space-1:  0.25rem;  --space-2:  0.5rem;
+      --space-3:  0.75rem;  --space-4:  1rem;
+      --space-5:  1.25rem;  --space-6:  1.5rem;
+      --space-8:  2rem;     --space-10: 2.5rem;
+      --space-12: 3rem;     --space-16: 4rem;
+      --space-20: 5rem;     --space-24: 6rem;
+
+      --radius-md:   8px;
+      --radius-xl:   20px;
+      --radius-full: 9999px;
+      --border-thin:   1px;
+      --border-medium: 2px;
+
+      --section-y: clamp(4rem, 8vw, 7rem);
+      --section-x: clamp(1.5rem, 5vw, 4rem);
+      --container: 1180px;
+
+      --dur-fast:  150ms;
+      --dur-base:  220ms;
+      --dur-slow:  320ms;
+      --dur-enter: 520ms;
+      --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out:  cubic-bezier(0, 0, 0.2, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: var(--font-body);
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+    body { background: var(--color-black); color: var(--color-text-on-dark); }
+
+    /* ── Animations ── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.35; transform: scale(0.6); }
+    }
+
+    .animate-in { opacity: 0; animation: fade-up var(--dur-enter) var(--ease-out) forwards; }
+    .animate-in[data-delay="1"] { animation-delay: 80ms; }
+    .animate-in[data-delay="2"] { animation-delay: 190ms; }
+    .animate-in[data-delay="3"] { animation-delay: 300ms; }
+    .animate-in[data-delay="4"] { animation-delay: 410ms; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity var(--dur-enter) var(--ease-out), transform var(--dur-enter) var(--ease-out);
+    }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .reveal[data-delay="1"] { transition-delay: 80ms; }
+    .reveal[data-delay="2"] { transition-delay: 160ms; }
+    .reveal[data-delay="3"] { transition-delay: 240ms; }
+    .reveal[data-delay="4"] { transition-delay: 320ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-in, .reveal { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+
+    /* ── Container ── */
+    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--section-x); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-2); padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-base); letter-spacing: 0.01em;
+      text-decoration: none; cursor: pointer;
+      border: var(--border-medium) solid transparent; white-space: nowrap;
+      transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+                  border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease-spring),
+                  box-shadow var(--dur-fast) var(--ease);
+      user-select: none; -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn--green { background: var(--color-green); color: var(--color-black); border-color: var(--color-green); font-weight: var(--weight-bold); }
+    .btn--green:hover { background: #c5f5a8; border-color: #c5f5a8; }
+
+    .btn--ghost { background: rgba(255,255,255,0.06); color: var(--color-white); border-color: var(--color-border-on-dark); }
+    .btn--ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.28); }
+
+    .btn--blue { background: var(--color-blue); color: var(--color-white); border-color: var(--color-blue); font-weight: var(--weight-bold); }
+    .btn--blue:hover { background: var(--color-blue-mid); border-color: var(--color-blue-mid); }
+
+    .btn .arr { display: inline-block; transition: transform var(--dur-fast) var(--ease-spring); }
+    .btn:hover .arr { transform: translateX(3px); }
+
+    /* ════════════════════════════════════
+       NAV
+    ════════════════════════════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding-block: var(--space-5);
+      transition: background-color var(--dur-slow) var(--ease), border-color var(--dur-slow) var(--ease), padding var(--dur-slow) var(--ease);
+      border-bottom: var(--border-thin) solid transparent;
+    }
+    .nav[data-scrolled="true"] {
+      background: rgba(13,13,18,0.88);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--color-border-on-dark);
+      padding-block: var(--space-4);
+    }
+    .nav__inner { display: flex; align-items: center; gap: var(--space-8); }
+
+    .nav__logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav__logo-svg { height: 16px; width: auto; color: var(--color-green); display: block; }
+
+    .nav__links { display: flex; align-items: center; gap: var(--space-8); margin-left: auto; }
+    .nav__link {
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      color: var(--color-text-on-dark-muted); text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .nav__link:hover { color: var(--color-white); }
+    .nav__cta { margin-left: var(--space-4); }
+
+    .nav__toggle {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; background: none; border: none; cursor: pointer;
+      padding: var(--space-2); margin-left: auto; color: var(--color-white);
+    }
+    .nav__toggle-bar { display: block; width: 22px; height: 2px; background: currentColor; border-radius: var(--radius-full); }
+
+    .nav__mobile {
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--color-black);
+      border-top: var(--border-thin) solid var(--color-border-on-dark);
+      padding: var(--space-6) var(--section-x) var(--space-8);
+    }
+    .nav__mobile-link {
+      display: block; font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: var(--text-3xl); color: var(--color-text-on-dark); text-decoration: none;
+      padding-block: var(--space-4); border-bottom: var(--border-thin) solid var(--color-border-on-dark);
+      letter-spacing: var(--tracking-tight); transition: color var(--dur-fast) var(--ease);
+    }
+    .nav__mobile-link:hover { color: var(--color-green); }
+    .nav__mobile-link--cta { color: var(--color-green); border-bottom: none; margin-top: var(--space-4); }
+
+    @media (max-width: 768px) {
+      .nav__links, .nav__cta { display: none; }
+      .nav__toggle { display: flex; }
+    }
+
+    /* ════════════════════════════════════
+       HERO — DARK
+    ════════════════════════════════════ */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 130px; padding-bottom: var(--space-24); overflow: hidden;
+      background: var(--color-black);
+    }
+    /* Blue glow — bottom left, matching the screenshot */
+    .hero__glow-bl {
+      position: absolute; bottom: -120px; left: -180px;
+      width: 750px; height: 650px;
+      background: radial-gradient(ellipse at center, rgba(28,82,255,0.24) 0%, transparent 62%);
+      pointer-events: none;
+    }
+    /* Subtler blue — top right */
+    .hero__glow-tr {
+      position: absolute; top: -100px; right: -80px;
+      width: 500px; height: 450px;
+      background: radial-gradient(ellipse at center, rgba(28,82,255,0.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero__content { position: relative; z-index: 1; }
+
+    .hero__pill {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      background: rgba(255,255,255,0.06);
+      border: var(--border-thin) solid var(--color-border-on-dark);
+      border-radius: var(--radius-full);
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-xs); letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--color-text-on-dark-muted); margin-bottom: var(--space-8);
+    }
+    .hero__pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--color-green);
+      animation: pulse-dot 2.2s ease-in-out infinite;
+    }
+
+    .hero__headline {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: clamp(3rem, 8.5vw, 6rem);
+      line-height: var(--leading-none); letter-spacing: var(--tracking-tight);
+      color: var(--color-white); margin-bottom: var(--space-6); max-width: 14ch;
+    }
+
+    .hero__editorial {
+      font-family: var(--font-editorial); font-style: italic;
+      font-optical-sizing: none; font-variation-settings: 'opsz' 9;
+      font-weight: var(--weight-light);
+      font-size: clamp(var(--text-xl), 2.8vw, var(--text-3xl));
+      letter-spacing: var(--tracking-snug); line-height: var(--leading-snug);
+      color: var(--color-green); margin-bottom: var(--space-10);
+    }
+
+    .hero__ctas { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+    @media (max-width: 560px) {
+      .hero__ctas { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ════════════════════════════════════
+       SECTION — MISSION (CREAM)
+    ════════════════════════════════════ */
+    .section-mission {
+      background: var(--color-cream); color: var(--color-text-on-light);
+      padding-block: var(--section-y); text-align: center;
+    }
+    .eyebrow-blue {
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-xs); letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--color-blue); margin-bottom: var(--space-5);
+    }
+    .section-mission__h {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: clamp(var(--text-3xl), 4.5vw, var(--text-5xl));
+      letter-spacing: var(--tracking-tight); color: var(--color-gray-800);
+      line-height: var(--leading-tight); margin-bottom: var(--space-6);
+      max-width: 22ch; margin-inline: auto;
+    }
+    .section-mission__body {
+      font-size: var(--text-lg); line-height: var(--leading-relaxed);
+      color: var(--color-text-on-light-muted);
+      max-width: 46ch; margin-inline: auto; margin-bottom: var(--space-8);
+    }
+    .section-mission__rule {
+      width: 36px; height: 2px; background: var(--color-blue);
+      margin-inline: auto; opacity: 0.45;
+    }
+
+    /* ════════════════════════════════════
+       SECTION — SERVICES (WHITE)
+    ════════════════════════════════════ */
+    .section-services {
+      background: var(--color-white); color: var(--color-text-on-light);
+      padding-block: var(--section-y);
+    }
+    .services-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between; gap: var(--space-8);
+      margin-bottom: var(--space-16); flex-wrap: wrap;
+    }
+    .services-heading {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: clamp(var(--text-3xl), 4vw, var(--text-4xl));
+      letter-spacing: var(--tracking-tight); color: var(--color-gray-800);
+      line-height: var(--leading-snug); max-width: 18ch;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: var(--border-thin) solid var(--color-border-on-light);
+    }
+    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px)  { .services-grid { grid-template-columns: 1fr; } }
+
+    .svc-col {
+      padding: var(--space-12) var(--space-10) var(--space-12) var(--space-10);
+      border-right: var(--border-thin) solid var(--color-border-on-light);
+      display: flex; flex-direction: column; gap: var(--space-5);
+      transition: opacity 400ms var(--ease);
+    }
+    .svc-col:last-child { border-right: none; padding-right: 0; }
+    .svc-col:first-child { padding-left: 0; }
+
+    .services-grid:has(.svc-col:hover) .svc-col:not(:hover) {
+      opacity: 0.35;
+      transition: opacity 600ms var(--ease);
+    }
+
+    .svc-col__index {
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-xs); letter-spacing: var(--tracking-widest);
+      text-transform: uppercase; color: var(--color-blue);
+    }
+    .svc-col__title {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: var(--text-2xl); letter-spacing: var(--tracking-tight);
+      color: var(--color-gray-800); line-height: var(--leading-snug);
+    }
+    .svc-col__desc {
+      font-size: var(--text-sm); line-height: var(--leading-relaxed);
+      color: var(--color-text-on-light-muted); flex: 1;
+    }
+    .svc-col__link {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-sm); color: var(--color-blue); text-decoration: none;
+      margin-top: auto;
+      transition: gap var(--dur-fast) var(--ease-spring);
+    }
+    .svc-col__link:hover { gap: var(--space-3); }
+
+    @media (max-width: 900px) {
+      .svc-col { border-right: none; border-bottom: var(--border-thin) solid var(--color-border-on-light); padding: var(--space-10) 0; }
+      .svc-col:last-child { border-bottom: none; }
+    }
+
+    /* ════════════════════════════════════
+       SECTION — CTA STRIP (BLUE)
+    ════════════════════════════════════ */
+    .section-cta {
+      background: var(--color-blue); color: var(--color-white);
+      padding-block: var(--space-20); position: relative; overflow: hidden;
+    }
+    .section-cta::after {
+      content: ''; position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+      width: 480px; height: 280px;
+      background: radial-gradient(ellipse at right, rgba(255,255,255,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-8); flex-wrap: wrap;
+    }
+    .cta-heading {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+      letter-spacing: var(--tracking-tight); line-height: var(--leading-tight); max-width: 18ch;
+    }
+    .cta-sub {
+      font-size: var(--text-base); color: rgba(255,255,255,0.68);
+      margin-top: var(--space-3); max-width: 44ch; line-height: var(--leading-relaxed);
+    }
+
+    /* ════════════════════════════════════
+       FOOTER — NAVY
+    ════════════════════════════════════ */
+    .footer {
+      background: var(--color-navy); color: var(--color-text-on-dark);
+      padding-block: var(--space-12);
+      border-top: var(--border-thin) solid rgba(255,255,255,0.06);
+    }
+    .footer__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-6); flex-wrap: wrap;
+    }
+    .footer__logo { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; }
+    .footer__wordmark {
+      font-family: var(--font-display); font-weight: var(--weight-extrabold);
+      font-size: var(--text-xl); letter-spacing: var(--tracking-snug); color: var(--color-green);
+    }
+    .footer__links { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+    .footer__link {
+      font-family: var(--font-body); font-weight: var(--weight-medium);
+      font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      color: rgba(255,255,255,0.4); text-decoration: none;
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .footer__link:hover { color: var(--color-white); }
+    .footer__copy { font-size: var(--text-sm); color: rgba(255,255,255,0.28); }
+
+    @media (max-width: 640px) {
+      .footer__inner { flex-direction: column; align-items: flex-start; gap: var(--space-8); }
+      .services-header { flex-direction: column; align-items: flex-start; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════ -->
+<header class="nav" data-scrolled="false">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo" aria-label="BlueBench home">
+      <!-- Full BlueBench logo: mark + wordmark, viewBox cropped to content -->
+      <svg class="nav__logo-svg" viewBox="213 483 1465 185" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Mark (bench symbol) -->
+        <path d="M526.93 664.898L483.787 664.902C466.869 664.903 451.997 665.926 435.459 661.336C424.35 658.202 413.873 653.158 404.497 646.431C392.24 637.679 386.948 626.679 369.995 626.673C352.889 626.669 347.886 637.361 335.655 646.192C326.174 653.042 315.563 658.175 304.303 661.357C287.733 665.973 272.021 664.825 254.987 664.825L213.017 664.821L213 611.954C237.658 611.531 263.485 611.926 288.239 611.926C282.869 606.14 275.633 599.288 269.946 593.605L233.976 557.642L271.522 520.176L313.846 562.421L343.531 592.123L343.493 483.003L396.537 483L396.546 592.102L468.548 520.18C480.994 532.086 493.865 545.433 506.123 557.676C487.992 575.42 469.741 593.911 451.832 611.923L527 611.916C526.639 629.182 526.966 647.522 526.93 664.898Z" fill="currentColor"/>
+        <!-- Wordmark -->
+        <path d="M548.25 487.75H614.5C631.667 487.75 645.167 492.167 655 501C664.834 509.833 669.75 521.25 669.75 535.25C669.75 544.083 667.25 552 662.25 559C657.417 566 651.25 570.75 643.75 573.25C652.417 575.25 659.834 580 666 587.5C672.167 594.833 675.25 603.917 675.25 614.75C675.25 629.417 670.084 641.5 659.75 651C649.584 660.333 636.25 665 619.75 665H548.25V487.75ZM586.75 558.75H608.25C615.25 558.75 620.75 557.083 624.75 553.75C628.917 550.25 631 545.5 631 539.5C631 533.667 629 529.083 625 525.75C621 522.25 615.25 520.5 607.75 520.5H586.75V558.75ZM586.75 632.75H611.5C619.167 632.75 625.167 630.917 629.5 627.25C633.834 623.417 636 618.333 636 612C636 605.833 633.834 600.833 629.5 597C625.167 593.167 619.167 591.25 611.5 591.25H586.75V632.75ZM725.547 665H687.547V484H725.547V665ZM826.586 665C825.92 662 825.586 657.833 825.586 652.5C822.586 657.5 818.003 661.333 811.836 664C805.67 666.5 799.17 667.75 792.336 667.75C777.67 667.75 766.086 663.167 757.586 654C749.253 644.667 745.086 633.083 745.086 619.25V540.75H783.086V611.25C783.086 617.583 784.753 622.75 788.086 626.75C791.586 630.75 796.586 632.75 803.086 632.75C809.42 632.75 814.42 630.833 818.086 627C821.92 623 823.836 617.833 823.836 611.5V540.75H861.836V642.75C861.836 650.917 862.253 658.333 863.086 665H826.586ZM911.268 588H961.018C960.684 582.333 958.434 577.417 954.268 573.25C950.268 569.083 944.184 567 936.018 567C928.684 567 922.851 569.167 918.518 573.5C914.184 577.833 911.768 582.667 911.268 588ZM963.768 620.25L995.518 629.25C992.351 640.75 985.768 650.25 975.768 657.75C965.768 665.083 953.268 668.75 938.268 668.75C920.268 668.75 904.934 662.75 892.268 650.75C879.768 638.75 873.518 622.667 873.518 602.5C873.518 583.167 879.601 567.417 891.768 555.25C904.101 543.083 918.684 537 935.518 537C954.851 537 970.018 542.667 981.018 554C992.184 565.167 997.768 580.75 997.768 600.75C997.768 607.083 997.518 611 997.018 612.5H910.518C910.851 619.333 913.768 625.083 919.268 629.75C924.768 634.25 931.268 636.5 938.768 636.5C951.601 636.5 959.934 631.083 963.768 620.25ZM1012.17 487.75H1078.42C1095.58 487.75 1109.08 492.167 1118.92 501C1128.75 509.833 1133.67 521.25 1133.67 535.25C1133.67 544.083 1131.17 552 1126.17 559C1121.33 566 1115.17 570.75 1107.67 573.25C1116.33 575.25 1123.75 580 1129.92 587.5C1136.08 594.833 1139.17 603.917 1139.17 614.75C1139.17 629.417 1134 641.5 1123.67 651C1113.5 660.333 1100.17 665 1083.67 665H1012.17V487.75ZM1050.67 558.75H1072.17C1079.17 558.75 1084.67 557.083 1088.67 553.75C1092.83 550.25 1094.92 545.5 1094.92 539.5C1094.92 533.667 1092.92 529.083 1088.92 525.75C1084.92 522.25 1079.17 520.5 1071.67 520.5H1050.67V558.75ZM1050.67 632.75H1075.42C1083.08 632.75 1089.08 630.917 1093.42 627.25C1097.75 623.417 1099.92 618.333 1099.92 612C1099.92 605.833 1097.75 600.833 1093.42 597C1089.08 593.167 1083.08 591.25 1075.42 591.25H1050.67V632.75ZM1181.43 588H1231.18C1230.85 582.333 1228.6 577.417 1224.43 573.25C1220.43 569.083 1214.35 567 1206.18 567C1198.85 567 1193.02 569.167 1188.68 573.5C1184.35 577.833 1181.93 582.667 1181.43 588ZM1233.93 620.25L1265.68 629.25C1262.52 640.75 1255.93 650.25 1245.93 657.75C1235.93 665.083 1223.43 668.75 1208.43 668.75C1190.43 668.75 1175.1 662.75 1162.43 650.75C1149.93 638.75 1143.68 622.667 1143.68 602.5C1143.68 583.167 1149.77 567.417 1161.93 555.25C1174.27 543.083 1188.85 537 1205.68 537C1225.02 537 1240.18 542.667 1251.18 554C1262.35 565.167 1267.93 580.75 1267.93 600.75C1267.93 607.083 1267.68 611 1267.18 612.5H1180.68C1181.02 619.333 1183.93 625.083 1189.43 629.75C1194.93 634.25 1201.43 636.5 1208.93 636.5C1221.77 636.5 1230.1 631.083 1233.93 620.25ZM1317.83 593.75V665H1279.83V540.75H1316.58V555C1319.75 549.5 1324.58 545.25 1331.08 542.25C1337.75 539.083 1344.5 537.5 1351.33 537.5C1366.17 537.5 1377.42 542.167 1385.08 551.5C1392.75 560.667 1396.58 572.5 1396.58 587V665H1358.58V593.5C1358.58 587 1356.83 581.833 1353.33 578C1350 574 1345 572 1338.33 572C1332.17 572 1327.17 574.083 1323.33 578.25C1319.67 582.25 1317.83 587.417 1317.83 593.75ZM1473.26 572C1465.1 572 1458.26 574.75 1452.76 580.25C1447.43 585.75 1444.76 593.333 1444.76 603C1444.76 612.5 1447.51 620 1453.01 625.5C1458.68 631 1465.6 633.75 1473.76 633.75C1480.6 633.75 1486.18 632 1490.51 628.5C1495.01 624.833 1498.01 620.417 1499.51 615.25L1533.01 625.5C1530.01 637.333 1523.26 647.5 1512.76 656C1502.43 664.5 1489.43 668.75 1473.76 668.75C1455.1 668.75 1439.26 662.583 1426.26 650.25C1413.43 637.75 1407.01 622 1407.01 603C1407.01 583.833 1413.26 568.083 1425.76 555.75C1438.43 543.25 1454.01 537 1472.51 537C1488.68 537 1501.93 541.167 1512.26 549.5C1522.6 557.833 1529.26 568.083 1532.26 580.25L1498.26 590.5C1496.76 585.167 1493.93 580.75 1489.76 577.25C1485.6 573.75 1480.1 572 1473.26 572ZM1581.65 592V665H1543.65V484H1581.65V548.75C1589.15 541.25 1599.73 537.5 1613.4 537.5C1628.9 537.5 1640.57 542.167 1648.4 551.5C1656.4 560.667 1660.4 572.5 1660.4 587V665H1622.4V593.5C1622.4 587 1620.65 581.833 1617.15 578C1613.82 574 1608.82 572 1602.15 572C1596.32 572 1591.48 573.917 1587.65 577.75C1583.98 581.417 1581.98 586.167 1581.65 592Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <nav class="nav__links" aria-label="Primary navigation">
+      <a href="#work"     class="nav__link">Work</a>
+      <a href="#services" class="nav__link">Services</a>
+      <a href="#about"    class="nav__link">About</a>
+      <a href="#contact"  class="nav__link">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn--blue nav__cta">Start Project</a>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav__toggle-bar"></span>
+      <span class="nav__toggle-bar"></span>
+    </button>
+  </div>
+  <div class="nav__mobile" id="mobile-menu" hidden>
+    <nav aria-label="Mobile navigation">
+      <a href="#work"     class="nav__mobile-link">Work</a>
+      <a href="#services" class="nav__mobile-link">Services</a>
+      <a href="#about"    class="nav__mobile-link">About</a>
+      <a href="#contact"  class="nav__mobile-link nav__mobile-link--cta">Start Project →</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ══ HERO ═════════════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero__glow-bl" aria-hidden="true"></div>
+  <div class="hero__glow-tr" aria-hidden="true"></div>
+
+  <div class="container hero__content">
+    <p class="hero__pill animate-in" data-delay="1">
+      <span class="hero__pill-dot" aria-hidden="true"></span>
+      Available for Q4 projects
+    </p>
+    <h1 id="hero-heading" class="hero__headline animate-in" data-delay="2">
+      Build products<br>that scale.
+    </h1>
+    <p class="hero__editorial animate-in" data-delay="3">
+      Senior design &amp; engineering on demand.
+    </p>
+    <div class="hero__ctas animate-in" data-delay="4">
+      <a href="#contact" class="btn btn--green">Start a project <span class="arr" aria-hidden="true">→</span></a>
+      <a href="#work"    class="btn btn--ghost">See our work</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ MISSION ══════════════════════════════════════ -->
+<section class="section-mission" id="about" aria-labelledby="mission-heading">
+  <div class="container">
+    <p class="eyebrow-blue reveal">Our Mission</p>
+    <h2 id="mission-heading" class="section-mission__h reveal" data-delay="1">Better products,<br>built faster.</h2>
+    <p class="section-mission__body reveal" data-delay="2">
+      We deliver production-ready code and high-fidelity design. No hand-holding.
+      Just senior talent focused on your growth.
+    </p>
+    <div class="section-mission__rule reveal" data-delay="3" aria-hidden="true"></div>
+  </div>
+</section>
+
+
+<!-- ══ SERVICES ═════════════════════════════════════ -->
+<section class="section-services" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <p class="eyebrow-blue reveal">Expertise</p>
+        <h2 id="services-heading" class="services-heading reveal" data-delay="1">
+          Design &amp; Engineering<br>for scale.
+        </h2>
+      </div>
+      <a href="#contact" class="btn btn--blue reveal" data-delay="2">
+        Explore All Services <span class="arr" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="services-grid">
+      <article class="svc-col reveal" data-delay="1">
+        <span class="svc-col__index">01</span>
+        <h3 class="svc-col__title">Web Design</h3>
+        <p class="svc-col__desc">High-conversion web platforms that outperform the competition and scale with your users.</p>
+        <a href="#contact" class="svc-col__link">Learn more <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="svc-col reveal" data-delay="2">
+        <span class="svc-col__index">02</span>
+        <h3 class="svc-col__title">App Development</h3>
+        <p class="svc-col__desc">Native performance and seamless UX for iOS and Android, built to handle millions of requests.</p>
+        <a href="#contact" class="svc-col__link">Learn more <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="svc-col reveal" data-delay="3">
+        <span class="svc-col__index">03</span>
+        <h3 class="svc-col__title">Product Strategy</h3>
+        <p class="svc-col__desc">Data-driven roadmaps to minimise risk and maximise ROI. We build what actually matters.</p>
+        <a href="#contact" class="svc-col__link">Learn more <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="svc-col reveal" data-delay="4">
+        <span class="svc-col__index">04</span>
+        <h3 class="svc-col__title">AI Transformation</h3>
+        <p class="svc-col__desc">Upskill your team and redesign your workflows around AI — from strategy through to hands-on implementation.</p>
+        <a href="#contact" class="svc-col__link">Learn more <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ CTA STRIP ════════════════════════════════════ -->
+<section class="section-cta" id="contact" aria-labelledby="cta-heading">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="reveal">
+        <h2 id="cta-heading" class="cta-heading">Ready for launch?</h2>
+        <p class="cta-sub">Ship your next product with a team that values speed and quality as much as you do.</p>
+      </div>
+      <a href="mailto:hello@bluebench.co" class="btn btn--green reveal" data-delay="2" style="font-size:1.05rem;padding:0.9rem 2rem;">
+        Let's talk <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="/" class="footer__logo" aria-label="BlueBench home">
+      <svg style="height:20px;width:auto;color:var(--color-green);display:block;" viewBox="213 483 1465 185" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M526.93 664.898L483.787 664.902C466.869 664.903 451.997 665.926 435.459 661.336C424.35 658.202 413.873 653.158 404.497 646.431C392.24 637.679 386.948 626.679 369.995 626.673C352.889 626.669 347.886 637.361 335.655 646.192C326.174 653.042 315.563 658.175 304.303 661.357C287.733 665.973 272.021 664.825 254.987 664.825L213.017 664.821L213 611.954C237.658 611.531 263.485 611.926 288.239 611.926C282.869 606.14 275.633 599.288 269.946 593.605L233.976 557.642L271.522 520.176L313.846 562.421L343.531 592.123L343.493 483.003L396.537 483L396.546 592.102L468.548 520.18C480.994 532.086 493.865 545.433 506.123 557.676C487.992 575.42 469.741 593.911 451.832 611.923L527 611.916C526.639 629.182 526.966 647.522 526.93 664.898Z" fill="currentColor"/>
+        <path d="M548.25 487.75H614.5C631.667 487.75 645.167 492.167 655 501C664.834 509.833 669.75 521.25 669.75 535.25C669.75 544.083 667.25 552 662.25 559C657.417 566 651.25 570.75 643.75 573.25C652.417 575.25 659.834 580 666 587.5C672.167 594.833 675.25 603.917 675.25 614.75C675.25 629.417 670.084 641.5 659.75 651C649.584 660.333 636.25 665 619.75 665H548.25V487.75ZM586.75 558.75H608.25C615.25 558.75 620.75 557.083 624.75 553.75C628.917 550.25 631 545.5 631 539.5C631 533.667 629 529.083 625 525.75C621 522.25 615.25 520.5 607.75 520.5H586.75V558.75ZM586.75 632.75H611.5C619.167 632.75 625.167 630.917 629.5 627.25C633.834 623.417 636 618.333 636 612C636 605.833 633.834 600.833 629.5 597C625.167 593.167 619.167 591.25 611.5 591.25H586.75V632.75ZM725.547 665H687.547V484H725.547V665ZM826.586 665C825.92 662 825.586 657.833 825.586 652.5C822.586 657.5 818.003 661.333 811.836 664C805.67 666.5 799.17 667.75 792.336 667.75C777.67 667.75 766.086 663.167 757.586 654C749.253 644.667 745.086 633.083 745.086 619.25V540.75H783.086V611.25C783.086 617.583 784.753 622.75 788.086 626.75C791.586 630.75 796.586 632.75 803.086 632.75C809.42 632.75 814.42 630.833 818.086 627C821.92 623 823.836 617.833 823.836 611.5V540.75H861.836V642.75C861.836 650.917 862.253 658.333 863.086 665H826.586ZM911.268 588H961.018C960.684 582.333 958.434 577.417 954.268 573.25C950.268 569.083 944.184 567 936.018 567C928.684 567 922.851 569.167 918.518 573.5C914.184 577.833 911.768 582.667 911.268 588ZM963.768 620.25L995.518 629.25C992.351 640.75 985.768 650.25 975.768 657.75C965.768 665.083 953.268 668.75 938.268 668.75C920.268 668.75 904.934 662.75 892.268 650.75C879.768 638.75 873.518 622.667 873.518 602.5C873.518 583.167 879.601 567.417 891.768 555.25C904.101 543.083 918.684 537 935.518 537C954.851 537 970.018 542.667 981.018 554C992.184 565.167 997.768 580.75 997.768 600.75C997.768 607.083 997.518 611 997.018 612.5H910.518C910.851 619.333 913.768 625.083 919.268 629.75C924.768 634.25 931.268 636.5 938.768 636.5C951.601 636.5 959.934 631.083 963.768 620.25ZM1012.17 487.75H1078.42C1095.58 487.75 1109.08 492.167 1118.92 501C1128.75 509.833 1133.67 521.25 1133.67 535.25C1133.67 544.083 1131.17 552 1126.17 559C1121.33 566 1115.17 570.75 1107.67 573.25C1116.33 575.25 1123.75 580 1129.92 587.5C1136.08 594.833 1139.17 603.917 1139.17 614.75C1139.17 629.417 1134 641.5 1123.67 651C1113.5 660.333 1100.17 665 1083.67 665H1012.17V487.75ZM1050.67 558.75H1072.17C1079.17 558.75 1084.67 557.083 1088.67 553.75C1092.83 550.25 1094.92 545.5 1094.92 539.5C1094.92 533.667 1092.92 529.083 1088.92 525.75C1084.92 522.25 1079.17 520.5 1071.67 520.5H1050.67V558.75ZM1050.67 632.75H1075.42C1083.08 632.75 1089.08 630.917 1093.42 627.25C1097.75 623.417 1099.92 618.333 1099.92 612C1099.92 605.833 1097.75 600.833 1093.42 597C1089.08 593.167 1083.08 591.25 1075.42 591.25H1050.67V632.75ZM1181.43 588H1231.18C1230.85 582.333 1228.6 577.417 1224.43 573.25C1220.43 569.083 1214.35 567 1206.18 567C1198.85 567 1193.02 569.167 1188.68 573.5C1184.35 577.833 1181.93 582.667 1181.43 588ZM1233.93 620.25L1265.68 629.25C1262.52 640.75 1255.93 650.25 1245.93 657.75C1235.93 665.083 1223.43 668.75 1208.43 668.75C1190.43 668.75 1175.1 662.75 1162.43 650.75C1149.93 638.75 1143.68 622.667 1143.68 602.5C1143.68 583.167 1149.77 567.417 1161.93 555.25C1174.27 543.083 1188.85 537 1205.68 537C1225.02 537 1240.18 542.667 1251.18 554C1262.35 565.167 1267.93 580.75 1267.93 600.75C1267.93 607.083 1267.68 611 1267.18 612.5H1180.68C1181.02 619.333 1183.93 625.083 1189.43 629.75C1194.93 634.25 1201.43 636.5 1208.93 636.5C1221.77 636.5 1230.1 631.083 1233.93 620.25ZM1317.83 593.75V665H1279.83V540.75H1316.58V555C1319.75 549.5 1324.58 545.25 1331.08 542.25C1337.75 539.083 1344.5 537.5 1351.33 537.5C1366.17 537.5 1377.42 542.167 1385.08 551.5C1392.75 560.667 1396.58 572.5 1396.58 587V665H1358.58V593.5C1358.58 587 1356.83 581.833 1353.33 578C1350 574 1345 572 1338.33 572C1332.17 572 1327.17 574.083 1323.33 578.25C1319.67 582.25 1317.83 587.417 1317.83 593.75ZM1473.26 572C1465.1 572 1458.26 574.75 1452.76 580.25C1447.43 585.75 1444.76 593.333 1444.76 603C1444.76 612.5 1447.51 620 1453.01 625.5C1458.68 631 1465.6 633.75 1473.76 633.75C1480.6 633.75 1486.18 632 1490.51 628.5C1495.01 624.833 1498.01 620.417 1499.51 615.25L1533.01 625.5C1530.01 637.333 1523.26 647.5 1512.76 656C1502.43 664.5 1489.43 668.75 1473.76 668.75C1455.1 668.75 1439.26 662.583 1426.26 650.25C1413.43 637.75 1407.01 622 1407.01 603C1407.01 583.833 1413.26 568.083 1425.76 555.75C1438.43 543.25 1454.01 537 1472.51 537C1488.68 537 1501.93 541.167 1512.26 549.5C1522.6 557.833 1529.26 568.083 1532.26 580.25L1498.26 590.5C1496.76 585.167 1493.93 580.75 1489.76 577.25C1485.6 573.75 1480.1 572 1473.26 572ZM1581.65 592V665H1543.65V484H1581.65V548.75C1589.15 541.25 1599.73 537.5 1613.4 537.5C1628.9 537.5 1640.57 542.167 1648.4 551.5C1656.4 560.667 1660.4 572.5 1660.4 587V665H1622.4V593.5C1622.4 587 1620.65 581.833 1617.15 578C1613.82 574 1608.82 572 1602.15 572C1596.32 572 1591.48 573.917 1587.65 577.75C1583.98 581.417 1581.98 586.167 1581.65 592Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <nav class="footer__links" aria-label="Footer links">
+      <a href="mailto:hello@bluebench.co" class="footer__link">hello@bluebench.co</a>
+      <a href="#" class="footer__link">LinkedIn</a>
+      <a href="#" class="footer__link">Instagram</a>
+    </nav>
+    <p class="footer__copy">© 2026 BlueBench Digital</p>
+  </div>
+</footer>
+
+
+<script>
+  // Nav scroll state
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.dataset.scrolled = window.scrollY > 40 ? 'true' : 'false';
+  }, { passive: true });
+
+  // Mobile menu
+  const toggle = document.querySelector('.nav__toggle');
+  const mobileMenu = document.querySelector('.nav__mobile');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    mobileMenu.hidden = open;
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
