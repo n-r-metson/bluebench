@@ -112,16 +112,21 @@
       revealEls.forEach(el => io.observe(el));
 
       // process chain border/dot activation (visual only, not visibility)
-      const processRows = document.querySelectorAll('.process__row');
-      const pio = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            pio.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.4 });
-      processRows.forEach(el => pio.observe(el));
+      const processChain = document.querySelector('.process__chain');
+      if (processChain) {
+        const processRows = Array.from(processChain.querySelectorAll('.process__row'));
+        const pio = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              processRows.forEach((row, index) => {
+                setTimeout(() => row.classList.add('is-visible'), index * 220);
+              });
+              pio.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        pio.observe(processChain);
+      }
     }
   } catch (e) {
     // If anything above fails, elements never received .reveal-ready,
