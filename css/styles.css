@@ -191,24 +191,37 @@ img { max-width: 100%; display: block; }
   z-index: 0;
 }
 .hero > .wrap { position: relative; z-index: 1; }
-.hero__case {
+.hero__case,
+.section__eyebrow {
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.74rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.92);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.hero__case::before {
+.hero__case { color: rgba(255,255,255,0.92); }
+.section__eyebrow { color: currentColor; }
+.hero__case::before,
+.section__eyebrow::before {
   content: '';
   display: block;
   width: 28px;
   height: 1px;
+  background: currentColor;
+}
+.hero__case::before {
   background: var(--color-green);
+}
+.leadership__heading {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  line-height: 1.04;
+  color: var(--color-gray-900);
+  margin-bottom: 16px;
+  max-width: 18ch;
 }
 .hero__headline {
   font-size: clamp(2.6rem, 6.5vw, 5.5rem);
