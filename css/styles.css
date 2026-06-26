@@ -540,10 +540,14 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
     border-left: none;
   }
   .process__row::before {
-    top: 13px;
+    top: 26px;
     left: 0;
     right: auto;
     transform: translate(-50%, -50%) scale(0.65);
+  }
+  .process__row:nth-child(3)::before,
+  .process__row:nth-child(6)::before {
+    display: block;
   }
   .process__row:last-child::before { display: block; }
   .process__row.is-visible::before {
