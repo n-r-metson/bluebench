@@ -346,6 +346,8 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px 24px;
   align-items: center;
+  justify-items: center;
+  justify-content: center;
   margin-bottom: 20px;
 }
 .leadership__logo {
