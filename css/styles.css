@@ -217,11 +217,9 @@ img { max-width: 100%; display: block; }
   background: var(--color-green);
 }
 .leadership__heading {
-  font-size: clamp(2.2rem, 4vw, 3.6rem);
-  line-height: 1.04;
-  color: var(--color-gray-900);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-gray-800);
   margin-bottom: 16px;
-  max-width: 18ch;
 }
 .hero__headline {
   font-size: clamp(2.6rem, 6.5vw, 5.5rem);
