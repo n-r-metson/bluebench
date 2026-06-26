@@ -342,12 +342,11 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   letter-spacing: 0.16em;
 }
 .leadership__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 18px 24px;
-  align-items: center;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  gap: 18px 24px;
   margin-bottom: 20px;
 }
 .leadership__logo {
