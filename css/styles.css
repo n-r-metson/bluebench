@@ -219,7 +219,7 @@ img { max-width: 100%; display: block; }
 .leadership__heading {
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--color-gray-800);
-  margin-bottom: 16px;
+  margin-bottom: 40px;
   max-width: 24ch;
   line-height: 1.02;
 }
