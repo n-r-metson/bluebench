@@ -119,7 +119,7 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               processRows.forEach((row, index) => {
-                setTimeout(() => row.classList.add('is-visible'), index * 220);
+                setTimeout(() => row.classList.add('is-visible'), index * 420);
               });
               pio.unobserve(entry.target);
             }

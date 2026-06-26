@@ -416,7 +416,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   position: relative;
   padding: 28px 24px 0 0;
   border-top: 2px solid var(--color-border-on-light);
-  transition: border-color 0.6s var(--ease-out);
+  transition: border-color 1s var(--ease-out);
 }
 .process__row::after {
   content: '';
@@ -427,13 +427,12 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   height: 8px;
   border-radius: 50%;
   background: var(--color-border-on-light);
-  transform: translate(50%, -50%) scale(0.65);
-  opacity: 0;
+  transform: translate(50%, -50%) scale(0.75);
+  opacity: 0.18;
   transition:
-    border-color 0.4s var(--ease-out),
-    background-color 0.4s var(--ease-out),
-    opacity 0.3s ease,
-    transform 0.35s ease;
+    background-color 0.6s var(--ease-out),
+    opacity 0.4s ease,
+    transform 0.45s ease;
 }
 .process__row:last-child::after { display: none; }
 .process__row.is-visible { border-top-color: var(--color-blue); }
