@@ -347,7 +347,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 18px 24px;
+  gap: 24px 32px;
   margin-bottom: 20px;
 }
 .leadership__logo {
@@ -355,7 +355,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 18px;
+  padding: 0 24px;
   transition: transform 220ms ease;
 }
 .leadership__logo:hover {
