@@ -317,12 +317,12 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   margin-bottom: 16px;
 }
 .leadership__logo {
-  height: 38px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  padding: 0 18px;
+  padding: 0 22px;
   border-radius: 999px;
   background: linear-gradient(155deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
   border: 1px solid rgba(255,255,255,0.7);
@@ -339,8 +339,8 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   border-color: rgba(46,42,38,0.18);
 }
 .leadership__logo img {
-  max-width: 96px;
-  max-height: 20px;
+  max-width: 110px;
+  max-height: 24px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -354,12 +354,12 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
     gap: 12px;
   }
   .leadership__logo {
-    height: 34px;
-    padding: 0 14px;
+    height: 40px;
+    padding: 0 18px;
   }
   .leadership__logo img {
-    max-width: 84px;
-    max-height: 18px;
+    max-width: 96px;
+    max-height: 22px;
   }
 }
 @media (max-width: 600px) {
@@ -367,13 +367,13 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
     gap: 10px;
   }
   .leadership__logo {
-    height: 30px;
-    padding: 0 12px;
+    height: 34px;
+    padding: 0 14px;
     border-radius: 999px;
   }
   .leadership__logo img {
-    max-width: 72px;
-    max-height: 16px;
+    max-width: 84px;
+    max-height: 18px;
   }
 }
 .leadership__logo--placeholder span {
@@ -558,14 +558,14 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   align-items: center;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(0.78rem, 0.95vw, 0.86rem);
+  font-size: clamp(0.86rem, 1.05vw, 0.94rem);
   line-height: 1.4;
   letter-spacing: -0.005em;
   color: var(--color-gray-800);
   background: linear-gradient(155deg, rgba(46,42,38,0.05), rgba(46,42,38,0.02));
   border: 1px solid rgba(46,42,38,0.12);
   border-radius: 999px;
-  padding: 9px 16px;
+  padding: 12px 18px;
   box-shadow:
     0 1px 1px rgba(46,42,38,0.04),
     0 8px 18px rgba(46,42,38,0.06),
@@ -593,8 +593,8 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 
 @media (max-width: 480px) {
   .principles__item {
-    font-size: 0.68rem;
-    padding: 7px 12px;
+    font-size: 0.78rem;
+    padding: 9px 14px;
     white-space: nowrap;
   }
   .principles__flow {
@@ -604,8 +604,8 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 
 @media (max-width: 340px) {
   .principles__item {
-    font-size: 0.6rem;
-    padding: 6px 10px;
+    font-size: 0.72rem;
+    padding: 8px 12px;
   }
 }
 
