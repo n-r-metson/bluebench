@@ -467,7 +467,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 .process__chain {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 28px 24px;
+  gap: 24px 12px;
 }
 .process__chain::after {
   display: none;
@@ -477,7 +477,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 }
 .process__row {
   min-width: 0;
-  padding: 0 12px;
+  padding: 0 8px;
   text-align: left;
   border-top: none;
   transition: none;
@@ -489,10 +489,10 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 60px;
-  padding: 8px 16px;
-  margin-bottom: 14px;
-  border-radius: 20px;
+  min-width: 56px;
+  padding: 6px 14px;
+  margin-bottom: 10px;
+  border-radius: 18px;
   border: 1px solid rgba(28, 82, 255, 0.12);
   color: var(--color-blue);
   font-family: var(--font-display);
