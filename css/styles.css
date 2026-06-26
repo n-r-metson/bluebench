@@ -504,7 +504,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 }
 @media (max-width: 640px) {
   .process__chain { grid-template-columns: 1fr; gap: 0; }
-  .process__chain::after { opacity: 1; }
+  .process__chain::after { display: none; }
   .process__row {
     padding: 20px 0 20px 20px;
     border-top: none;
