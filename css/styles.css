@@ -494,6 +494,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   margin-bottom: 10px;
   border-radius: 18px;
   border: 1px solid rgba(28, 82, 255, 0.12);
+  background: var(--color-white);
   color: var(--color-blue);
   font-family: var(--font-display);
   font-weight: 700;
