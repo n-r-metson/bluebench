@@ -118,8 +118,9 @@
         const pio = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
+              processChain.classList.add('is-visible');
               processRows.forEach((row, index) => {
-                setTimeout(() => row.classList.add('is-visible'), index * 420);
+                setTimeout(() => row.classList.add('is-visible'), index * 680);
               });
               pio.unobserve(entry.target);
             }
