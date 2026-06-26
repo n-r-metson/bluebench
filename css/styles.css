@@ -371,10 +371,16 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 .leadership__logo--bp img {
   max-width: 180px;
 }
+.leadership__logo--entrepreneurs img {
+  max-width: 200px;
+}
 .leadership__logo--lingokids img {
   transform: translateY(4px);
 }
 @media (max-width: 900px) {
+  .leadership__logo--entrepreneurs img {
+    max-width: 120px;
+  }
   .leadership__grid {
     gap: 12px;
   }
