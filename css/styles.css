@@ -441,7 +441,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 /* ============================================================
    HOW WE WORK — horizontal chain, compact
    ============================================================ */
-.process__head { max-width: 46ch; margin-bottom: 48px; }
+.process__head { max-width: 56ch; margin-bottom: 48px; }
 .process__eyebrow {
   font-family: var(--font-body);
   font-weight: 700;
