@@ -540,7 +540,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
     border-left: none;
   }
   .process__row::before {
-    top: 0;
+    top: 13px;
     left: 0;
     right: auto;
     transform: translate(-50%, -50%) scale(0.65);
