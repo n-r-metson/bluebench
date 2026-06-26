@@ -488,10 +488,10 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 52px;
-  padding: 10px 14px;
+  min-width: 60px;
+  padding: 8px 16px;
   margin-bottom: 14px;
-  border-radius: 999px;
+  border-radius: 20px;
   border: 1px solid rgba(28, 82, 255, 0.12);
   color: var(--color-blue);
   font-family: var(--font-display);
