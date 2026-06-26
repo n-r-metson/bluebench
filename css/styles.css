@@ -220,6 +220,7 @@ img { max-width: 100%; display: block; }
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--color-gray-800);
   margin-bottom: 16px;
+  max-width: 14ch;
 }
 .hero__headline {
   font-size: clamp(2.6rem, 6.5vw, 5.5rem);
