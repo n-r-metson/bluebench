@@ -220,7 +220,8 @@ img { max-width: 100%; display: block; }
   font-size: clamp(2rem, 4vw, 3rem);
   color: var(--color-gray-800);
   margin-bottom: 16px;
-  max-width: 14ch;
+  max-width: 24ch;
+  line-height: 1.02;
 }
 .hero__headline {
   font-size: clamp(2.6rem, 6.5vw, 5.5rem);
@@ -443,13 +444,22 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 .process__head { max-width: 46ch; margin-bottom: 48px; }
 .process__eyebrow {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-blue);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.process__eyebrow::before {
+  content: '';
   display: block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
 }
 .process__heading { font-size: clamp(2rem, 4vw, 3rem); color: var(--color-gray-800); margin-bottom: 16px; }
 .process__sub { font-size: 1.05rem; color: var(--color-text-on-light-muted); }
