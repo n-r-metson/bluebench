@@ -527,7 +527,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
 
 @media (max-width: 1280px) {
   .process__chain { grid-template-columns: repeat(3, 1fr); gap: 28px 0; }
-  .process__chain::after { opacity: 1; }
+  .process__chain::after { display: none; }
   .process__row { padding-right: 20px; }
   .process__row:nth-child(3)::before, .process__row:nth-child(6)::before { display: none; }
 }
@@ -537,7 +537,7 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
   .process__row {
     padding: 20px 0 20px 20px;
     border-top: none;
-    border-left: 2px solid var(--color-border-on-light);
+    border-left: none;
   }
   .process__row::before {
     top: 0;
@@ -546,7 +546,6 @@ button.btn { font: inherit; font-family: var(--font-body); font-weight: 500; fon
     transform: translate(-50%, -50%) scale(0.65);
   }
   .process__row:last-child::before { display: block; }
-  .process__row.is-visible { border-left-color: var(--color-blue); }
   .process__row.is-visible::before {
     background: var(--color-blue);
     opacity: 1;
